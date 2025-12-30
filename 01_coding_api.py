@@ -45,8 +45,8 @@ print("=== LLM Output ===")
 print(response.output_text)
 print(response)
 
-with open(f"{start}_{end}_coding_output.txt", "w", encoding="utf-8") as f:
+with open(f".\\outputs\\{start}_{end}_coding_output.txt", "w", encoding="utf-8") as f:
     f.write(response.output_text)
 
-with open(f"{start}_{end}_coding_response.txt", "w", encoding="utf-8") as f:
+with open(f".\\responses\\{start}_{end}_coding_response.txt", "w", encoding="utf-8") as f:
     f.write(str(response))
