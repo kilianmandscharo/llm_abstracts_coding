@@ -9,6 +9,8 @@ relevant_columns = ['MesH_ID', 'title', 'abstract', 'final-decision_include']
 df = df[relevant_columns]
 
 df_shuffled = df.sample(frac=1, random_state=42).reset_index(drop=True)
+output_path_df = "shuffled_master_sheet.xlsx"
+df_shuffled.to_excel(output_path_df, index=False)
 
 print(df_shuffled.head())
 

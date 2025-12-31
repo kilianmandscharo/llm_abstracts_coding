@@ -28,25 +28,29 @@ def build_prompt_with_papers(prompt, papers_text, start_idx=0, end_idx=5):
     combined_text = prompt + "\n\n" + "\n\n".join(selected_papers)
     return combined_text
 
-start = 5
-end = 10 
-# Example usage: papers 1 to 5 (0-based index)
-test_input = build_prompt_with_papers(prompt_text, papers_text, start_idx=start, end_idx=end)
-print(test_input)
+start = 10
+end = 100
+batch_size = 5
 
-# Send to the model
-response = client.responses.create(
-    model="gpt-4.1-mini",  # small GPT-4 variant
-    input=test_input,
-    temperature=0
-)
+for i in range(start, end, batch_size):
+    batch_start = i
+    batch_end = min(i + batch_size, end)
+    
+    test_input = build_prompt_with_papers(prompt_text, papers_text, start_idx=batch_start, end_idx=batch_end)
 
-print("=== LLM Output ===")
-print(response.output_text)
-print(response)
+    # Send to the model
+    response = client.responses.create(
+        model="gpt-4.1-mini",  # small GPT-4 variant
+        input=test_input,
+        temperature=0
+    )
 
-with open(f".\\outputs\\{start}_{end}_coding_output.txt", "w", encoding="utf-8") as f:
-    f.write(response.output_text)
+    print(f"=== LLM Output for papers {batch_start+1} to {batch_end} ===")
+    print(response.output_text)
+    print(response)
 
-with open(f".\\responses\\{start}_{end}_coding_response.txt", "w", encoding="utf-8") as f:
-    f.write(str(response))
+    with open(f".\\outputs\\{batch_start+1}_{batch_end}_coding_output.txt", "w", encoding="utf-8") as f:
+        f.write(response.output_text)
+
+    with open(f".\\responses\\{batch_start+1}_{batch_end}_coding_response.txt", "w", encoding="utf-8") as f:
+        f.write(str(response))
