@@ -28,8 +28,8 @@ def build_prompt_with_papers(prompt, papers_text, start_idx=0, end_idx=5):
     combined_text = prompt + "\n\n" + "\n\n".join(selected_papers)
     return combined_text
 
-start = 0
-end = 100
+start = 100
+end = 1000
 batch_size = 5
 
 for i in range(start, end, batch_size):
@@ -40,7 +40,7 @@ for i in range(start, end, batch_size):
 
     # Send to the model
     response = client.responses.create(
-        model="gpt-4.1-mini",  # small GPT-4 variant
+        model="gpt-4.1-mini",  # small GPT-5 variant
         input=test_input,
         temperature=0
     )
