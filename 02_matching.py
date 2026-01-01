@@ -8,7 +8,7 @@ df['MesH_ID'] = df['MesH_ID'].astype(str).str.strip()
 
 decisions = []
 
-for f in Path("outputs").glob("*_coding_output.txt"):
+for f in Path("outputs_2").glob("*_coding_output_2.txt"):
     tmp = pd.read_csv(
         f,
         header=None,
@@ -20,9 +20,9 @@ for f in Path("outputs").glob("*_coding_output.txt"):
 decisions_df = pd.concat(decisions, ignore_index=True) 
 
 merged_df = df.merge(decisions_df, on="MesH_ID", how="left")
-merged_df = merged_df.rename(columns={"decision": "decision_LLM"})
+merged_df = merged_df.rename(columns={"decision": "decision_LLM_2"})
 
 print(merged_df.head())
 
-output_path = "matched_master_sheet.xlsx"
+output_path = "matched_master_sheet_2.xlsx"
 merged_df.to_excel(output_path, index=False)

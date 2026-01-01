@@ -9,7 +9,7 @@ client = OpenAI(
 )
 
 # Step 1: Load the prompt
-with open("coding_prompt.txt", "r", encoding="utf-8") as f:
+with open("coding_prompt_2.txt", "r", encoding="utf-8") as f:
     prompt_text = f.read().strip() 
 
 # Step 2: Load the papers
@@ -28,7 +28,7 @@ def build_prompt_with_papers(prompt, papers_text, start_idx=0, end_idx=5):
     combined_text = prompt + "\n\n" + "\n\n".join(selected_papers)
     return combined_text
 
-start = 10
+start = 0
 end = 100
 batch_size = 5
 
@@ -49,8 +49,8 @@ for i in range(start, end, batch_size):
     print(response.output_text)
     print(response)
 
-    with open(f".\\outputs\\{batch_start+1}_{batch_end}_coding_output.txt", "w", encoding="utf-8") as f:
+    with open(f".\\outputs_2\\{batch_start+1}_{batch_end}_coding_output_2.txt", "w", encoding="utf-8") as f:
         f.write(response.output_text)
 
-    with open(f".\\responses\\{batch_start+1}_{batch_end}_coding_response.txt", "w", encoding="utf-8") as f:
+    with open(f".\\responses_2\\{batch_start+1}_{batch_end}_coding_response_2.txt", "w", encoding="utf-8") as f:
         f.write(str(response))
